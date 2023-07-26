@@ -22,51 +22,7 @@ import ReactDOM from 'react-dom/client'
 
 import { createStore } from "redux"
 
-// const counterReducer = (state = 0, action) => {
-
-// 	switch(action.type) {
-// 		case 'INCREMENT':
-// 			return state + 1
-// 		case 'DECREMENT':
-// 			return state - 1
-// 		case 'ZERO':
-// 			return 0
-// 		default: 
-// 			return state
-// 	}
-
-// }
-
-// const store = createStore(counterReducer)
-
-// const App = () => {
-// 	return (
-// 		<div>
-// 			<div>
-// 				{store.getState()}
-// 			</div>
-// 			<button onClick={e => store.dispatch({type: 'INCREMENT'})}>
-// 				Plus
-// 			</button>
-// 			<button onClick={e => store.dispatch({type: 'DECREMENT'})}>
-// 				Minus
-// 			</button>
-// 			<button onClick={e => store.dispatch({type: 'ZERO'})}>
-// 				Zero
-// 			</button>
-// 		</div>
-// 	)
-// }
-
-const noteReducer = (state = [], action) => {
-
-	if(action.type === 'NEW_NOTE') {
-		state.concat(action.payload)
-		return state
-	}
-	return state
-
-}
+import noteReducer from "./reducers/noteReducer"
 
 const store = createStore(noteReducer)
 
