@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { useSelector, useDispatch } from "react-redux"
+
+import { createNote, toggleImportanceOf } from "./reducers/noteReducer"
+
+const App = () => {
+
+	const dispatch = useDispatch()
+	const notes = useSelector(state => state)
+
+	const addNote = (event) => {
+		event.preventDefault()
+		const content = event.target.note.value
+		event.target.note.value = ''
+		dispatch(createNote(content))
+	}
+
+	const toggleImportance = (id) => {
+		dispatch(toggleImportanceOf(id))
+	}
+
+	return (
+		<div>
+			<form onSubmit={addNote}>
+				<input name="note"/>
+				<button type='submit'>Add</button>
+			</form>
+			<ul>
+				{notes.map(note => 
+					<li 
+						key = {note.id}
+						onClick = {() => toggleImportance(note.id)}
+					>
+						{note.content} <strong>{note.important ? 'important': ''}</strong>
+					</li>
+				)}
+			</ul>
+		</div>
+	)
+
 }
 
-export default App;
+export default App

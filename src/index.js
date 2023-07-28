@@ -21,51 +21,17 @@ import React from "react"
 import ReactDOM from 'react-dom/client'
 
 import { createStore } from "redux"
+import { Provider } from "react-redux"
 
+import App from './App'
 import noteReducer from "./reducers/noteReducer"
 
 const store = createStore(noteReducer)
 
-store.dispatch({
-	type: 'NEW_NOTE',
-	payload: {
-		content: 'the app state is in redux store',
-		important: true,
-		id: 1
-	}
-})
-
-store.dispatch({
-	type: 'NEW_NOTE',
-	payload: {
-		content: 'state changes are mad with actions',
-		important: false,
-		id: 1
-	}
-})
-
-const App = () => {
-
-	return (
-		<div>
-			<ul>
-				{store.getState().map(note => 
-					<li key={note.id}>
-						{note.content} <strong>{note.important? 'important' : '' }</strong>
-					</li>
-				)}
-			</ul>
-		</div>
-	)
-
-}
-
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
-const renderApp = () => {
-	console.log('changed')
-	root.render(<App/>)
-}
-
-renderApp()
-store.subscribe(renderApp)
+root.render(
+	<Provider store = {store}>
+		<App/>
+	</Provider>
+)
