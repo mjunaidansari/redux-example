@@ -3,7 +3,24 @@ import deepFreeze from "deep-freeze"
 
 describe('noteReducer', () => {
 
-	test('returns a new state with action NEW_NOTE', () => {
+	test('returns a new state with action notes/createNote', () => {
+
+		const state = []
+		const action = {
+			type: 'notes/createNote',
+			payload: 'the app state is in redux store'
+		}
+
+		deepFreeze(state) // ensures that the reducer does not change the state given as parameter
+
+		const newState = noteReducer(state, action)
+
+		expect(newState).toHaveLength(1)
+		expect(newState.map(s => s.content)).toContainEqual(action.payload)
+
+	})
+
+	test('returns a new state with action notes/toggleImportanceOf', () => {
 
 		const state = [
 			{
@@ -18,10 +35,8 @@ describe('noteReducer', () => {
 			}
 		]
 		const action = {
-			type: 'TOGGLE_IMPORTANCE',
-			payload: {
-				id: 2,
-			}
+			type: 'notes/toggleImportanceOf',
+			payload: 2
 		}
 
 		deepFreeze(state) // ensures that the reducer does not change the state given as parameter
