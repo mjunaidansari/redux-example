@@ -8,9 +8,6 @@ import App from './App'
 import noteReducer from "./reducers/noteReducer"
 import filterReducer from "./reducers/filterReducer"
 
-import { filterChange } from "./reducers/filterReducer"
-import { createNote } from "./reducers/noteReducer"
-
 const store = configureStore({
 	reducer: {
 		notes: noteReducer,
