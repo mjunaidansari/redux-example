@@ -5,6 +5,8 @@ import { createNote } from "../reducers/noteReducer"
 
 import noteService from '../services/notes'
 
+import { createNote } from "../reducers/noteReducer"
+
 const NewNote = () => {
 
 	const dispatch = useDispatch()
@@ -13,7 +15,6 @@ const NewNote = () => {
 		event.preventDefault()
 		const content = event.target.note.value
 		event.target.note.value = ''
-		const newNote = await noteService.createNew(content)
 		dispatch(createNote(newNote))
 	}
 
